@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "28644702598",
+    "firebase_url": "https://hopeforanimalsapplication.firebaseio.com",
+    "project_id": "hopeforanimalsapplication",
+    "storage_bucket": "hopeforanimalsapplication.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:28644702598:android:22f9a4d2f0ef4deb",
+        "android_client_info": {
+          "package_name": "com.samniya.jamal.hopeforanimalsapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "28644702598-3438r33d8fu1hfn9v2itemih4tpt74rf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.samniya.jamal.hopeforanimalsapplication",
+            "certificate_hash": "8d4e87598d212bdb282d05faa7766dc9c486dbdf"
+          }
+        },
+        {
+          "client_id": "28644702598-bcahnonjf9ljn2c73cqruqmf3sfi9bds.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDXJjYgRjFdC3_KjO0OdfbdIoK5SIfD2ds"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "28644702598-bcahnonjf9ljn2c73cqruqmf3sfi9bds.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
