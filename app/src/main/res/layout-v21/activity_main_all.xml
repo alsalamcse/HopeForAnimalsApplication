@@ -62,7 +62,7 @@
     </android.support.v4.view.ViewPager>
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/add1"
+        android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
@@ -71,11 +71,10 @@
         tools:srcCompat="@android:drawable/ic_menu_add" />
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/searchBtn"
+        android:id="@+id/searchId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
-        app:srcCompat="?android:attr/actionModeWebSearchDrawable"
-        tools:targetApi="lollipop" />
+        app:srcCompat="?android:attr/actionModeWebSearchDrawable" />
 
 </android.support.design.widget.CoordinatorLayout>
