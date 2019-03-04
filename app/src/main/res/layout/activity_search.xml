@@ -10,8 +10,38 @@
         android:id="@+id/searchBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="37dp"
+        android:layout_marginRight="37dp"
+        android:layout_marginBottom="34dp"
         android:text="@android:string/search_go"
-        tools:layout_editor_absoluteX="259dp"
-        tools:layout_editor_absoluteY="429dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         tools:ignore="MissingConstraints" />
+
+    <Spinner
+        android:id="@+id/spinnerId"
+        android:layout_width="130dp"
+        android:layout_height="41dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Spinner
+        android:id="@+id/spinner2ID"
+        android:layout_width="130dp"
+        android:layout_height="39dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="397dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.033"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerId"
+        app:layout_constraintVertical_bias="1.0" />
+
 </android.support.constraint.ConstraintLayout>
