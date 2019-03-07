@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SearchActivity">
+    tools:context=".SearchActivity"
+    tools:layout_editor_absoluteY="81dp">
 
     <Button
         android:id="@+id/searchBtn"
@@ -19,29 +20,66 @@
         tools:ignore="MissingConstraints" />
 
     <Spinner
-        android:id="@+id/spinnerId"
-        android:layout_width="130dp"
-        android:layout_height="41dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
+        android:id="@+id/spinnerKind"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginTop="12dp"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginBottom="20dp"
+        android:spinnerMode="dialog"
+        app:layout_constraintBottom_toTopOf="@+id/spinnerAge"
+        app:layout_constraintEnd_toEndOf="@+id/spinnerAge"
+        app:layout_constraintStart_toStartOf="@+id/spinnerAge"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Spinner
-        android:id="@+id/spinner2ID"
-        android:layout_width="130dp"
-        android:layout_height="39dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="397dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.033"
+        android:id="@+id/spinnerAge"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="21dp"
+        app:layout_constraintBottom_toTopOf="@+id/edtPrice"
+        app:layout_constraintEnd_toEndOf="@+id/edtPrice"
+        app:layout_constraintStart_toStartOf="@+id/edtPrice"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerKind" />
+
+    <EditText
+        android:id="@+id/edtPrice"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginBottom="26dp"
+        android:ems="10"
+        android:hint="price"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/swLocation"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerId"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/spinnerAge" />
+
+    <Switch
+        android:id="@+id/swLocation"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginEnd="13dp"
+        android:layout_marginRight="13dp"
+        android:layout_marginBottom="21dp"
+        android:text="location"
+        app:layout_constraintBottom_toTopOf="@+id/checkBoxIsOk"
+        app:layout_constraintEnd_toEndOf="@+id/edtPrice"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edtPrice" />
+
+    <CheckBox
+        android:id="@+id/checkBoxIsOk"
+        android:layout_width="125dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginBottom="197dp"
+        android:text="isVaccinate"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/swLocation" />
 
 </android.support.constraint.ConstraintLayout>

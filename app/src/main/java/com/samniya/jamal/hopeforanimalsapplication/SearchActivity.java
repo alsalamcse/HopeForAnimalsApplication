@@ -1,7 +1,6 @@
 package com.samniya.jamal.hopeforanimalsapplication;
 
 import android.content.Intent;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -23,8 +22,8 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
         setContentView(R.layout.activity_search);
         Button search = (Button) findViewById(R.id.searchBtn);
 
-        Spinner KindSpinner = (Spinner) findViewById(R.id.spinner2ID);
-        Spinner AgeSpinner = (Spinner) findViewById(R.id.spinnerId);
+        Spinner KindSpinner = (Spinner) findViewById(R.id.spinnerAge);
+        Spinner AgeSpinner = (Spinner) findViewById(R.id.spinnerKind);
         // Spinner click listener
         AgeSpinner.setOnItemSelectedListener(this);
         KindSpinner.setOnItemSelectedListener(this);
@@ -71,11 +70,11 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
         //String item = parent.getItemAtPosition(position).toString();
        // InfoList[0] = item;
         switch (parent.getId()){
-            case R.id.spinnerId :
+            case R.id.spinnerKind:
                 String item = parent.getItemAtPosition(position).toString();
                 InfoList[1] = item;
                 break;
-            case R.id.spinner2ID :
+            case R.id.spinnerAge:
                 String item2 = parent.getItemAtPosition(position).toString();
                 InfoList[0] = item2;
                 break;
@@ -83,7 +82,8 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
     }
 
     @Override
-    public void onNothingSelected(AdapterView<?> parent) {
+    public void onNothingSelected(AdapterView<?> parent)
+    {
 
     }
 }
