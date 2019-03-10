@@ -35,25 +35,11 @@
         android:id="@+id/spinnerAge"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="21dp"
-        app:layout_constraintBottom_toTopOf="@+id/edtPrice"
-        app:layout_constraintEnd_toEndOf="@+id/edtPrice"
-        app:layout_constraintStart_toStartOf="@+id/edtPrice"
+        android:layout_marginBottom="18dp"
+        app:layout_constraintBottom_toTopOf="@+id/etColor"
+        app:layout_constraintEnd_toEndOf="@+id/etColor"
+        app:layout_constraintStart_toStartOf="@+id/etColor"
         app:layout_constraintTop_toBottomOf="@+id/spinnerKind" />
-
-    <EditText
-        android:id="@+id/edtPrice"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginBottom="26dp"
-        android:ems="10"
-        android:hint="price"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/swLocation"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerAge" />
 
     <Switch
         android:id="@+id/swLocation"
@@ -63,12 +49,12 @@
         android:layout_marginLeft="16dp"
         android:layout_marginEnd="13dp"
         android:layout_marginRight="13dp"
-        android:layout_marginBottom="21dp"
+        android:layout_marginBottom="22dp"
         android:text="location"
         app:layout_constraintBottom_toTopOf="@+id/checkBoxIsOk"
-        app:layout_constraintEnd_toEndOf="@+id/edtPrice"
+        app:layout_constraintEnd_toEndOf="@+id/etColor"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtPrice" />
+        app:layout_constraintTop_toBottomOf="@+id/etColor" />
 
     <CheckBox
         android:id="@+id/checkBoxIsOk"
@@ -76,10 +62,24 @@
         android:layout_height="0dp"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginBottom="197dp"
+        android:layout_marginBottom="206dp"
         android:text="isVaccinate"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/swLocation" />
+
+    <EditText
+        android:id="@+id/etColor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginBottom="18dp"
+        android:ems="10"
+        android:hint="Color"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/swLocation"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerAge" />
 
 </android.support.constraint.ConstraintLayout>
