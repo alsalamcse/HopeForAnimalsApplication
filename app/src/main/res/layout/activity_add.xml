@@ -14,11 +14,11 @@
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
-        android:layout_marginBottom="43dp"
+        android:layout_marginBottom="221dp"
         android:ems="10"
         android:hint="Name"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/selectPhoto1"
+        app:layout_constraintBottom_toTopOf="@+id/spinner"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -36,9 +36,13 @@
 
     <Spinner
         android:id="@+id/spinner"
-        android:layout_width="164dp"
-        android:layout_height="41dp"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="283dp" />
+        android:layout_width="223dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginBottom="187dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText" />
 
 </android.support.constraint.ConstraintLayout>

@@ -8,6 +8,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -72,11 +73,13 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
         switch (parent.getId()){
             case R.id.spinnerKind:
                 String item = parent.getItemAtPosition(position).toString();
-                InfoList[1] = item;
+               // InfoList[1] = item;
+                Toast.makeText(this, ""+item, Toast.LENGTH_SHORT).show();
                 break;
+
             case R.id.spinnerAge:
                 String item2 = parent.getItemAtPosition(position).toString();
-                InfoList[0] = item2;
+                Toast.makeText(this, ""+item2, Toast.LENGTH_SHORT).show();
                 break;
         }
     }
