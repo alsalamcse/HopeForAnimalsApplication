@@ -8,7 +8,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,8 +22,8 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
         setContentView(R.layout.activity_search);
         Button search = (Button) findViewById(R.id.searchBtn);
 
-        Spinner KindSpinner = (Spinner) findViewById(R.id.spinnerAge);
-        Spinner AgeSpinner = (Spinner) findViewById(R.id.spinnerKind);
+        Spinner KindSpinner = (Spinner) findViewById(R.id.spinnerKind);
+        Spinner AgeSpinner = (Spinner) findViewById(R.id.spinnerAge);
         // Spinner click listener
         AgeSpinner.setOnItemSelectedListener(this);
         KindSpinner.setOnItemSelectedListener(this);
@@ -74,12 +73,12 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
             case R.id.spinnerKind:
                 String item = parent.getItemAtPosition(position).toString();
                // InfoList[1] = item;
-                Toast.makeText(this, ""+item, Toast.LENGTH_SHORT).show();
+               // Toast.makeText(this, ""+item, Toast.LENGTH_SHORT).show();
                 break;
 
             case R.id.spinnerAge:
                 String item2 = parent.getItemAtPosition(position).toString();
-                Toast.makeText(this, ""+item2, Toast.LENGTH_SHORT).show();
+               // Toast.makeText(this, ""+item2, Toast.LENGTH_SHORT).show();
                 break;
         }
     }
