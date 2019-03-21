@@ -86,6 +86,7 @@ private EditText etFirstName,etLastName,etPhone,Email,etPassWord;
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful())
                         {
+
                             Toast.makeText(SignUpActivity.this, "Authentication Successful.", Toast.LENGTH_SHORT).show();
                             //updateUserProfile(task.getResult().getUser());
                             finish();
