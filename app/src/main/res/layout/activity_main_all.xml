@@ -33,19 +33,19 @@
             android:layout_height="wrap_content">
 
             <android.support.design.widget.TabItem
-                android:id="@+id/tabItem"
+                android:id="@+id/tab1_all"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/all" />
 
             <android.support.design.widget.TabItem
-                android:id="@+id/tabItem2"
+                android:id="@+id/tab2_my"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/my" />
 
             <android.support.design.widget.TabItem
-                android:id="@+id/tabItem3"
+                android:id="@+id/tab3_wish"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/wish" />
@@ -75,8 +75,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
+        android:focusable="true"
+        app:layout_anchor="@+id/container"
+        app:layout_anchorGravity="left|center"
         app:srcCompat="?android:attr/actionModeWebSearchDrawable"
-        tools:targetApi="lollipop"
-        android:focusable="true" />
+        tools:targetApi="lollipop" />
 
 </android.support.design.widget.CoordinatorLayout>

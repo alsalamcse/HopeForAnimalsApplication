@@ -25,11 +25,12 @@
         android:layout_width="151dp"
         android:layout_height="131dp"
         android:layout_marginTop="71dp"
-        android:layout_marginBottom="72dp"
+        android:layout_marginEnd="47dp"
+        android:layout_marginRight="47dp"
+        android:layout_marginBottom="75dp"
         android:background="@color/common_google_signin_btn_text_dark_default"
         app:layout_constraintBottom_toBottomOf="@+id/spinnerKind1"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@android:drawable/ic_menu_crop" />
 
@@ -48,10 +49,10 @@
         android:layout_height="41dp"
         android:layout_marginStart="1dp"
         android:layout_marginLeft="1dp"
-        android:layout_marginTop="14dp"
+        android:layout_marginTop="13dp"
         android:layout_marginEnd="1dp"
         android:layout_marginRight="1dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="15dp"
         app:layout_constraintBottom_toTopOf="@+id/etColor"
         app:layout_constraintEnd_toEndOf="@+id/etName"
         app:layout_constraintStart_toStartOf="@+id/etPrice"
@@ -79,10 +80,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="7dp"
         android:layout_marginLeft="7dp"
-        android:layout_marginBottom="60dp"
+        android:layout_marginBottom="59dp"
         android:ems="10"
         android:hint="Price"
-        android:inputType="textPersonName"
+        android:inputType="number"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -96,5 +97,19 @@
         android:text="Add"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView11"
+        android:layout_width="103dp"
+        android:layout_height="71dp"
+        android:layout_marginStart="89dp"
+        android:layout_marginLeft="89dp"
+        android:layout_marginEnd="89dp"
+        android:layout_marginRight="89dp"
+        android:layout_marginBottom="108dp"
+        app:layout_constraintBottom_toBottomOf="@+id/spinnerKind1"
+        app:layout_constraintEnd_toStartOf="@+id/selectPhoto1"
+        app:layout_constraintStart_toStartOf="@+id/etPrice"
+        app:srcCompat="@color/common_google_signin_btn_text_dark_default" />
 
 </android.support.constraint.ConstraintLayout>

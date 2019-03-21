@@ -1,9 +1,7 @@
 package com.samniya.jamal.hopeforanimalsapplication;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.provider.MediaStore;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -12,31 +10,36 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AddActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener
-{
+public class AddActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     private Button add;
-    EditText etName1,etColor1,etPrice1;
+    EditText etName1, etColor1, etPrice1;
     private Spinner AgeSpinner1, KindSpinner1;
     private String[] InfoList;
-    ImageButton selectPhoto;
+    public static final int SPECIAL_NUMBER = 1;
+
+    ImageButton selectPhoto1;
+    ImageView imageView1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
-        EditText etName1 =(EditText)findViewById(R.id.etName);
-        EditText etPrice1 = (EditText)findViewById(R.id.etPrice);
-        EditText etColor1 =(EditText)findViewById(R.id.etColor);
-        Button add =(Button)findViewById(R.id.btnAdd);
-         AgeSpinner1 = (Spinner) findViewById(R.id.spinnerAge1);
-         KindSpinner1 = (Spinner) findViewById(R.id.spinnerKind1);
+         etName1 = findViewById(R.id.etName);///////////
+        etPrice1 =  findViewById(R.id.etPrice);////////////
+         etColor1 =  findViewById(R.id.etColor);/////////
+        imageView1=findViewById(R.id.imageView11);
+
+         add =  findViewById(R.id.btnAdd);
+        AgeSpinner1 = (Spinner) findViewById(R.id.spinnerAge1);////////////
+        KindSpinner1 = (Spinner) findViewById(R.id.spinnerKind1);////////////
         AgeSpinner1.setOnItemSelectedListener(this);
         KindSpinner1.setOnItemSelectedListener(this);
 
@@ -54,6 +57,10 @@ public class AddActivity extends AppCompatActivity implements AdapterView.OnItem
         Age.add("10+");
 
 
+
+
+
+
         // Creating adapter for AgeSpinner
         ArrayAdapter<String> dataAdapter22 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, Kind);
 
@@ -66,26 +73,25 @@ public class AddActivity extends AppCompatActivity implements AdapterView.OnItem
         // attaching data adapter to AgeSpinner and kindSpinner
         AgeSpinner1.setAdapter(dataAdapter11);
         KindSpinner1.setAdapter(dataAdapter22);
+        selectPhoto1 = (ImageButton) findViewById(R.id.selectPhoto1);///////////
+
+        selectPhoto1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(Intent.createChooser(intent, "Select Picture"), SPECIAL_NUMBER);
+            }
+        });
+
+
 
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i2 = new Intent(getApplicationContext(), MainAllActivity.class); /////
-                startActivity(i2);
 
 
-                selectPhoto = (ImageButton) findViewById(R.id.selectPhoto1);
-
-                selectPhoto.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent();
-                        intent.setType("image/*");
-                        intent.setAction(Intent.ACTION_GET_CONTENT);
-                        startActivityForResult(Intent.createChooser(intent, "Select Picture"), 1234);
-
-                    }
-                });
             }
 
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -107,38 +113,90 @@ public class AddActivity extends AppCompatActivity implements AdapterView.OnItem
             }
 
 
-            public void onActivityResult(int requestCode, int resultCode, Intent intent) {
-                AddActivity.super.onActivityResult(requestCode, resultCode, intent);
-                if (requestCode == 1234) {
-                    if (resultCode == Activity.RESULT_OK) {
-                        if (intent != null) {
-                            try {
-                                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getApplicationContext().getContentResolver(), intent.getData());
-                                selectPhoto.setImageBitmap(bitmap);
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    } else if (resultCode == Activity.RESULT_CANCELED) {
-                        Toast.makeText(getApplicationContext(), "Canceled", Toast.LENGTH_SHORT).show();
-                    }
+
+
+
+            private void dataHandler(){
+
+                boolean isOk =true;// if all the fields well
+                String Name =etName1.getText().toString();
+                String price=etPrice1.getText().toString();
+                int finalPrice=Integer.parseInt(price);
+                String Kind = KindSpinner1.getSelectedItem().toString();
+                String Age = AgeSpinner1.getSelectedItem().toString();
+
+
+
+                if (price.length()==0){
+                    etPrice1.setError("please enter valued number");
+                    isOk=false;
                 }
+                if (Name.length()==0){
+                    etName1.setError("text can not be empty");
+                    isOk=false;
+                }
+                if (imageView1 == null){
+                    Toast.makeText(getApplicationContext() , "please choose an Image" , Toast.LENGTH_LONG).show();
+                    isOk = false;
+                }
+                if (Kind.length()==0){
+                    TextView errorText = (TextView)KindSpinner1.getSelectedView();
+                    errorText.setError("Select an Item");
+                    isOk = false;
+                }
+                if (Age.length()==0){
+                    TextView errorText1=(TextView)AgeSpinner1.getSelectedView();
+                    errorText1.setError("Select an Item");
+                    isOk =false;
+                }
+
+
+
+                if (isOk)
+                {
+                    MyTask task1=new MyTask(Name, price, Kind, Age);
+                    task1.getName(Name);
+                    task1.getPrice(price);
+                    task1.getKind(Kind);
+                    task1.getAge(Age);
+
+
+                }
+
+
+
+
+
+
+
+
+
+
+
             }
         });
     }
 
 
-                    @Override
-                    public void onItemSelected (AdapterView < ? > parent, View view,int position,
-                    long id){
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position,
+                               long id) {
 
-                    }
+    }
 
-                    @Override
-                    public void onNothingSelected (AdapterView < ? > parent){
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
 
-                    }
-                }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode,  Intent data) {
+        if (requestCode == SPECIAL_NUMBER){
+            Uri selectedPhoto = data.getData();
+            imageView1.setImageURI(selectedPhoto);
+        }
+    }
+}
 
 
 
