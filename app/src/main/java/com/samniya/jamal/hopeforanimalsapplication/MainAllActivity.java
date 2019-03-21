@@ -36,6 +36,7 @@ public class MainAllActivity extends AppCompatActivity {
      */
     private ViewPager mViewPager;
     private FloatingActionButton search;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,14 +61,14 @@ public class MainAllActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i=new Intent(getApplicationContext(),AddActivity.class);
+                Intent i = new Intent(getApplicationContext(), AddActivity.class);
                 startActivity(i);
             }
         });
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent ii = new Intent(getApplicationContext() , SearchActivity.class); /////
+                Intent ii = new Intent(getApplicationContext(), SearchActivity.class); /////
                 startActivity(ii);
 
             }
@@ -128,8 +129,8 @@ public class MainAllActivity extends AppCompatActivity {
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.tab1_all, container, false);
-            TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-            textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
+            //TextView textView = (TextView) rootView.findViewById(R.id.section_label);
+            //  textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
             return rootView;
         }
     }
@@ -140,15 +141,35 @@ public class MainAllActivity extends AppCompatActivity {
      */
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
+        AllFragment allFragment;
+        MyFragment myFragment;
+        WishFragment wishFragment;
+
+
         public SectionsPagerAdapter(FragmentManager fm) {
             super(fm);
         }
 
         @Override
         public Fragment getItem(int position) {
+            if (position == 0) {
+                if (allFragment == null)
+                    allFragment = new AllFragment();
+                return allFragment;
+            }
+            if (position == 1) {
+                if (myFragment == null)
+                    myFragment = new MyFragment();
+                return myFragment;
+            }
+            if (position == 2) {
+                if (wishFragment == null)
+                    wishFragment = new WishFragment();
+                return wishFragment;
+            }
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
-            
+
             return PlaceholderFragment.newInstance(position + 1);
         }
 
@@ -156,6 +177,18 @@ public class MainAllActivity extends AppCompatActivity {
         public int getCount() {
             // Show 3 total pages.
             return 3;
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            if (position == 0)
+                return "ALL";
+            if (position == 1)
+                return "MY";
+            if (position == 2)
+                return "WISH";
+
+            return null;
         }
     }
 }
