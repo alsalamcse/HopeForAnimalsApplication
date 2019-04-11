@@ -2,6 +2,7 @@ package com.samniya.jamal.hopeforanimalsapplication;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -15,6 +16,12 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,6 +31,8 @@ public class AddActivity extends AppCompatActivity implements AdapterView.OnItem
     private Spinner AgeSpinner1, KindSpinner1;
     private String[] InfoList;
     public static final int SPECIAL_NUMBER = 1;
+    private DatabaseReference databaseReference1;
+ ;
 
     ImageButton selectPhoto1;
     ImageView imageView1;
@@ -37,7 +46,8 @@ public class AddActivity extends AppCompatActivity implements AdapterView.OnItem
          etColor1 =  findViewById(R.id.etColor);/////////
         imageView1=findViewById(R.id.imageView11);
 
-         add =  findViewById(R.id.btnAdd);
+        databaseReference1= FirebaseDatabase.getInstance().getReference().child("Animal");
+         add = (Button)  findViewById(R.id.btnAdd);
         AgeSpinner1 = (Spinner) findViewById(R.id.spinnerAge1);////////////
         KindSpinner1 = (Spinner) findViewById(R.id.spinnerKind1);////////////
         AgeSpinner1.setOnItemSelectedListener(this);
@@ -48,19 +58,12 @@ public class AddActivity extends AppCompatActivity implements AdapterView.OnItem
         Kind.add("Cat");
         Kind.add("Bird");
         Kind.add("Rabbit");
-
         // Spinner Drop down elements
         List<String> Age = new ArrayList<String>();
         Age.add("0-2");
         Age.add("2-5");
         Age.add("5-10");
         Age.add("10+");
-
-
-
-
-
-
         // Creating adapter for AgeSpinner
         ArrayAdapter<String> dataAdapter22 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, Kind);
 
@@ -90,8 +93,14 @@ public class AddActivity extends AppCompatActivity implements AdapterView.OnItem
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
+                dataHandler();
+                DatabaseReference AnimalInfo = databaseReference1.child(etName1.getText().toString());
+                AnimalInfo.child(KindSpinner1.getSelectedItem().toString());
+                AnimalInfo.child(AgeSpinner1.getSelectedItem().toString());
+                AnimalInfo.child(etColor1.getText().toString());
+                AnimalInfo.child(etPrice1.getText().toString());
+                Intent intent1 = new Intent(getApplicationContext(), MainAllActivity.class);
+                startActivity(intent1);
             }
 
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -113,87 +122,103 @@ public class AddActivity extends AppCompatActivity implements AdapterView.OnItem
             }
 
 
+            private void dataHandler() {
+
+                boolean isOk = true;// if all the fields well
+
+                String name = etName1.getText().toString();
+                String color = etColor1.getText().toString();
+                String price = etPrice1.getText().toString();
+                int finalPrice = Integer.parseInt(price);
+                String kind = KindSpinner1.getSelectedItem().toString();
+                String age = AgeSpinner1.getSelectedItem().toString();
 
 
-
-            private void dataHandler(){
-
-                boolean isOk =true;// if all the fields well
-                String Name =etName1.getText().toString();
-                String price=etPrice1.getText().toString();
-                int finalPrice=Integer.parseInt(price);
-                String Kind = KindSpinner1.getSelectedItem().toString();
-                String Age = AgeSpinner1.getSelectedItem().toString();
-
-
-
-                if (price.length()==0){
+                if (price.length() == 0) {
                     etPrice1.setError("please enter valued number");
-                    isOk=false;
-                }
-                if (Name.length()==0){
-                    etName1.setError("text can not be empty");
-                    isOk=false;
-                }
-                if (imageView1 == null){
-                    Toast.makeText(getApplicationContext() , "please choose an Image" , Toast.LENGTH_LONG).show();
                     isOk = false;
                 }
-                if (Kind.length()==0){
-                    TextView errorText = (TextView)KindSpinner1.getSelectedView();
+                if (name.length() == 0) {
+                    etName1.setError("please enter valued number");
+                    isOk = false;
+                }
+                if (color.length() == 0) {
+                    etColor1.setError("text can not be empty");
+                    isOk = false;
+                }
+                if (imageView1 == null) {
+                    Toast.makeText(getApplicationContext(), "please choose an Image", Toast.LENGTH_LONG).show();
+                    isOk = false;
+                }
+                if (kind.length() == 0) {
+                    TextView errorText = (TextView) KindSpinner1.getSelectedView();
                     errorText.setError("Select an Item");
                     isOk = false;
                 }
-                if (Age.length()==0){
-                    TextView errorText1=(TextView)AgeSpinner1.getSelectedView();
+                if (age.length() == 0) {
+                    TextView errorText1 = (TextView) AgeSpinner1.getSelectedView();
                     errorText1.setError("Select an Item");
-                    isOk =false;
+                    isOk = false;
                 }
 
+                if (isOk) {
+                    final MyAnimal myAnimal = new MyAnimal();
+                    myAnimal.getAge();
+                    myAnimal.getColor();
+                    myAnimal.getKind();
+                    myAnimal.getPrice();
+                    myAnimal.getName();
 
 
-                if (isOk)
-                {
-                    MyTask task1=new MyTask(Name, price, Kind, Age);
-                    task1.getName(Name);
-                    task1.getPrice(price);
-                    task1.getKind(Kind);
-                    task1.getAge(Age);
+                    //get user email to set is as the owner of this task
 
+                    FirebaseAuth auth = FirebaseAuth.getInstance();
+                    myAnimal.setOwner(auth.getCurrentUser().getEmail());
 
+                    String key = databaseReference1.child("MyAnimal").push().getKey();
+                    myAnimal.setKey(name);
+
+                    databaseReference1.child("MyAnimal").child(name).setValue(myAnimal).addOnCompleteListener(new OnCompleteListener<Void>() {
+
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (myAnimal.isSuccessful()) {
+
+                                Toast.makeText(AddActivity.this, "Add Successful", Toast.LENGTH_SHORT).show();
+
+                                Intent i = new Intent(getBaseContext(), PatientsListActivity.class);
+
+                                startActivity(i);
+
+                            } else
+
+                                Toast.makeText(AddActivity.this, "Add Failed", Toast.LENGTH_SHORT).show();
+
+                        }
+
+                    });
                 }
+            }
 
 
-
-
-
-
-
-
-
-
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position,
+                                       long id) {
 
             }
-        });
-    }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
 
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position,
-                               long id) {
+            }
 
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode,  Intent data) {
-        if (requestCode == SPECIAL_NUMBER){
-            Uri selectedPhoto = data.getData();
-            imageView1.setImageURI(selectedPhoto);
+            @Override
+            protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+                if (requestCode == SPECIAL_NUMBER) {
+                    Uri selectedPhoto = data.getData();
+                    imageView1.setImageURI(selectedPhoto);
+                }
+            }
         }
     }
 }

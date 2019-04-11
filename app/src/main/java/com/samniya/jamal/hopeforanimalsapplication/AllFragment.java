@@ -7,6 +7,10 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
+import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 
 
 /**
@@ -17,7 +21,7 @@ import android.view.ViewGroup;
  * Use the {@link AllFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class AllFragment extends Fragment {
+public class AllFragment extends Fragment  {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -26,8 +30,12 @@ public class AllFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private ListView listView;
+    MyAnimalAdapter myAnimalAdapter;
+
 
     private OnFragmentInteractionListener mListener;
+
 
     public AllFragment() {
         // Required empty public constructor
@@ -54,6 +62,13 @@ public class AllFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        listView=(ListView) listView.findViewById(R.id.listView);
+        ArrayAdapter<String>myAnimalAdapter=new ArrayAdapter<>(getContext(),R.layout.animal_item);
+        AllFragment.setAdapter(myAnimalAdapter);
+
+
+
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -63,8 +78,11 @@ public class AllFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_all, container, false);
+
+
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -80,8 +98,8 @@ public class AllFragment extends Fragment {
         if (context instanceof OnFragmentInteractionListener) {
             mListener = (OnFragmentInteractionListener) context;
         } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
+//            throw new RuntimeException(context.toString()
+//                    + " must implement OnFragmentInteractionListener");
         }
     }
 
@@ -90,6 +108,9 @@ public class AllFragment extends Fragment {
         super.onDetach();
         mListener = null;
     }
+
+
+
 
     /**
      * This interface must be implemented by activities that contain this

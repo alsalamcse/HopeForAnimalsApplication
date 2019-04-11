@@ -36,19 +36,19 @@
                 android:id="@+id/tab1_all"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/all" />
+                android:text="All" />
 
             <android.support.design.widget.TabItem
                 android:id="@+id/tab2_my"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/my" />
+                android:text="My" />
 
             <android.support.design.widget.TabItem
                 android:id="@+id/tab3_wish"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/wish" />
+                android:text="Wish" />
 
         </android.support.design.widget.TabLayout>
     </android.support.design.widget.AppBarLayout>
