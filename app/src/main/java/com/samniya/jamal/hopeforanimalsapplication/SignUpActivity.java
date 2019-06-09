@@ -100,6 +100,6 @@ private EditText etFirstName,etLastName,etPhone,Email,etPassWord;
                         }
                     }
                 });
-        
+
     }
 }
