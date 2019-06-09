@@ -75,6 +75,9 @@ public class AllFragment extends Fragment  {
         }
     }
 
+    private static void setAdapter(ArrayAdapter<String> myAnimalAdapter) {
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

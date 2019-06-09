@@ -2,7 +2,9 @@ package com.samniya.jamal.hopeforanimalsapplication;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -122,6 +124,7 @@ public class AddActivity extends AppCompatActivity implements AdapterView.OnItem
             }
 
 
+            @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
             private void dataHandler() {
 
                 boolean isOk = true;// if all the fields well
@@ -132,6 +135,8 @@ public class AddActivity extends AppCompatActivity implements AdapterView.OnItem
                 int finalPrice = Integer.parseInt(price);
                 String kind = KindSpinner1.getSelectedItem().toString();
                 String age = AgeSpinner1.getSelectedItem().toString();
+
+
 
 
                 if (price.length() == 0) {
@@ -146,20 +151,21 @@ public class AddActivity extends AppCompatActivity implements AdapterView.OnItem
                     etColor1.setError("text can not be empty");
                     isOk = false;
                 }
-                if (imageView1 == null) {
-                    Toast.makeText(getApplicationContext(), "please choose an Image", Toast.LENGTH_LONG).show();
-                    isOk = false;
-                }
-                if (kind.length() == 0) {
-                    TextView errorText = (TextView) KindSpinner1.getSelectedView();
-                    errorText.setError("Select an Item");
-                    isOk = false;
-                }
-                if (age.length() == 0) {
-                    TextView errorText1 = (TextView) AgeSpinner1.getSelectedView();
-                    errorText1.setError("Select an Item");
-                    isOk = false;
-                }
+//                if (imageView1 == null) {
+//                    Toast.makeText(getApplicationContext(), "please choose an Image", Toast.LENGTH_LONG).show();
+//                    isOk = false;
+//                }
+//                if (kind.length() == 0) {
+//                    TextView errorText = (TextView) KindSpinner1.getSelectedView();
+//                    errorText.setError("Select an Item");
+//                    isOk = false;
+//                }
+//                if (age.length() == 0) {
+//                    TextView errorText1 = (TextView) AgeSpinner1.getSelectedView();
+//                    errorText1.setError("Select an Item");
+//                    isOk = false;
+//                }
+
 
                 if (isOk) {
                     final MyAnimal myAnimal = new MyAnimal();
@@ -173,20 +179,20 @@ public class AddActivity extends AppCompatActivity implements AdapterView.OnItem
                     //get user email to set is as the owner of this task
 
                     FirebaseAuth auth = FirebaseAuth.getInstance();
-                    myAnimal.setOwner(auth.getCurrentUser().getEmail());
+                    myAnimal.setOwner(auth.getCurrentUser().getUid());
 
                     String key = databaseReference1.child("MyAnimal").push().getKey();
-                    myAnimal.setKey(name);
+                    myAnimal.setKey(key);
 
-                    databaseReference1.child("MyAnimal").child(name).setValue(myAnimal).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    databaseReference1.child("MyAnimal").child(key).setValue(myAnimal).addOnCompleteListener(new OnCompleteListener<Void>() {
 
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
-                            if (myAnimal.isSuccessful()) {
+                            if (task.isSuccessful()) {
 
                                 Toast.makeText(AddActivity.this, "Add Successful", Toast.LENGTH_SHORT).show();
 
-                                Intent i = new Intent(getBaseContext(), PatientsListActivity.class);
+                                Intent i = new Intent(getBaseContext(), AllFragment.class);
 
                                 startActivity(i);
 
@@ -199,26 +205,35 @@ public class AddActivity extends AppCompatActivity implements AdapterView.OnItem
                     });
                 }
             }
+//            String name = etName1.getText().toString();
+//            String color = etColor1.getText().toString();
+//            String price = etPrice1.getText().toString();
+//            int finalPrice = Integer.parseInt(price);
+//            String kind = KindSpinner1.getSelectedItem().toString();
+//            String age = AgeSpinner1.getSelectedItem().toString();
 
 
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position,
-                                       long id) {
 
-            }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
 
-            }
 
-            @Override
-            protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-                if (requestCode == SPECIAL_NUMBER) {
-                    Uri selectedPhoto = data.getData();
-                    imageView1.setImageURI(selectedPhoto);
-                }
-            }
+        });
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == SPECIAL_NUMBER) {
+            Uri selectedPhoto = data.getData();
+            imageView1.setImageURI(selectedPhoto);
         }
     }
 }

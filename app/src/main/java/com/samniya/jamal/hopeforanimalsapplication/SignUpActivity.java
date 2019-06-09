@@ -72,6 +72,8 @@ private EditText etFirstName,etLastName,etPhone,Email,etPassWord;
         }
     }
 
+
+
     //4.
 
     /**
@@ -98,5 +100,6 @@ private EditText etFirstName,etLastName,etPhone,Email,etPassWord;
                         }
                     }
                 });
+        
     }
 }
