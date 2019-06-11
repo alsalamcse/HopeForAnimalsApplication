@@ -29,9 +29,11 @@ public class MyAnimalAdapter extends ArrayAdapter<MyAnimal> {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.animal_item, parent, false);
 
 
-            final MyAnimal mypatient = getItem(position); // return data object number"pos"
+            final MyAnimal myAnimal = getItem(position); // return data object number"pos"
 //
 //            TextView id = convertView.findViewById(R.id.id);
+            TextView name = convertView.findViewById(R.id.etName);
+            TextView color = convertView.findViewById(R.id.etColor);
 //
 //
 //            ImageButton edit = convertView.findViewById(R.id.edit);
@@ -40,12 +42,17 @@ public class MyAnimalAdapter extends ArrayAdapter<MyAnimal> {
 //
 //
 //            id.setText(mypatient.getId());
+            name.setText(myAnimal.getName());
+            color.setText(myAnimal.getColor());
+
 //
 
         }
 
 
-
+        return convertView;
     }
 
 }
+
+

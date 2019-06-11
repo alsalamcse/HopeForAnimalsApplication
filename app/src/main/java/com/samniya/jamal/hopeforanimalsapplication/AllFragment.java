@@ -63,9 +63,7 @@ public class AllFragment extends Fragment  {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        listView=(ListView) listView.findViewById(R.id.listView);
-        ArrayAdapter<String>myAnimalAdapter=new ArrayAdapter<>(getContext(),R.layout.animal_item);
-        AllFragment.setAdapter(myAnimalAdapter);
+
 
 
 
@@ -83,9 +81,12 @@ public class AllFragment extends Fragment  {
                              Bundle savedInstanceState) {
 
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_all, container, false);
+        View view= inflater.inflate(R.layout.fragment_all, container, false);
 
-
+        listView=(ListView)view. findViewById(R.id.listView);
+        ArrayAdapter<String>myAnimalAdapter=new ArrayAdapter<>(getContext(),R.layout.animal_item);
+        AllFragment.setAdapter(myAnimalAdapter);
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
