@@ -1,6 +1,8 @@
 package com.samniya.jamal.hopeforanimalsapplication;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -8,8 +10,14 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
-public class addAnimal {
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+public class addAnimal extends showAllTasksActivity {
     private EditText etName, etColor, etPrice;
     private Spinner spnKind, spnAge;
     private Button btnAdd;
@@ -21,14 +29,14 @@ public class addAnimal {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_animal);
-        etName =(EditText)findViewById(R.id.etName);
-        etColor =findViewById(R.id.etColor);
-        etPrice =findViewById(R.id.etPrice);
-        spnAge=findViewById(R.id.spinnerAge);
-        spnKind=findViewById(R.id.spinnerKind);
+        etName = (EditText) findViewById(R.id.etName);
+        etColor = findViewById(R.id.etColor);
+        etPrice = findViewById(R.id.etPrice);
+        spnAge = findViewById(R.id.spinnerAge);
+        spnKind = findViewById(R.id.spinnerKind);
         btnAdd = findViewById(R.id.btnAdd);
-        btnImage=findViewById(R.id.selectPhoto1);
-        imageView=findViewById(R.id.imageView11);
+        btnImage = findViewById(R.id.selectPhoto1);
+        imageView = findViewById(R.id.imageView11);
 
 
         btnAdd.setOnClickListener(new View.OnClickListener() {
@@ -51,7 +59,7 @@ public class addAnimal {
 
 
         if (name.length() == 0) {
-            etName .setError("you have to write a name ");
+            etName.setError("you have to write a name ");
             isok = false;
 
 
@@ -67,13 +75,12 @@ public class addAnimal {
 
 
         if (isok) {
-            MyBook book = new MyBook();
+            MyAnimal animal = new MyAnimal();
 
-            book.setName(name);
-            book.setWriter(writer);
-            book.setYear(year);
-            book.setThem(them);
-            book.setRecomm(recom);
+            animal.setName(name);
+            animal.setColor(color);
+            animal.setPrice(price);
+
 
             //FirebaseAuth auth=FirebaseAuth.getInstance();
             //profile.setOwner(auth.getCurrentUser().getEmail());
@@ -81,16 +88,25 @@ public class addAnimal {
             DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
 
             String key = reference.child("MyBook").push().getKey();
-            book.setKey(key);
-            reference.child("MyBook").child(key).setValue(book).addOnCompleteListener(new OnCompleteListener<Void>() {
+            animal.setKey(key);
+            reference.child("MyBook").child(key).setValue(animal).addOnCompleteListener(new OnCompleteListener<Void>() {
+
+
+
+
+                {
+
+                }
+
+
                 @Override
                 public void onComplete(@NonNull Task<Void> task1) {
                     if (task1.isSuccessful()) {
-                        Toast.makeText(addBookActivity.this, "add successed", Toast.LENGTH_SHORT).show();
-                        Intent i=new Intent(addBookActivity.this,bookListActivity.class);
+                        Toast.makeText(addAnimal.this, "add successed", Toast.LENGTH_SHORT).show();
+                        Intent i = new Intent(addAnimal.this, MyFragment.class);
                         startActivity(i);
                     } else {
-                        Toast.makeText(addBookActivity.this, "add failed" + task1.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(addAnimal.this, "add failed" + task1.getException().getMessage(), Toast.LENGTH_SHORT).show();
                     }
 
                 }
@@ -98,3 +114,4 @@ public class addAnimal {
 
         }
     }
+}

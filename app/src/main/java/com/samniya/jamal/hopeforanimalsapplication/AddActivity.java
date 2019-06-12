@@ -124,7 +124,7 @@ public class AddActivity extends AppCompatActivity implements AdapterView.OnItem
             }
 
 
-            @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
+            //@RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
             private void dataHandler() {
 
                 boolean isOk = true;// if all the fields well
