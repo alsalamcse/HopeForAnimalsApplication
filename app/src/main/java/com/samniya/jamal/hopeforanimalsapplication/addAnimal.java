@@ -87,9 +87,9 @@ public class addAnimal extends showAllTasksActivity {
 
             DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
 
-            String key = reference.child("MyBook").push().getKey();
+            String key = reference.child("MyAnimal").push().getKey();
             animal.setKey(key);
-            reference.child("MyBook").child(key).setValue(animal).addOnCompleteListener(new OnCompleteListener<Void>() {
+            reference.child("MyAnimal").child(key).setValue(animal).addOnCompleteListener(new OnCompleteListener<Void>() {
 
 
 

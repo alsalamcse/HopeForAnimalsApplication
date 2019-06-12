@@ -125,6 +125,10 @@ public class MainAllActivity extends AppCompatActivity {
             return fragment;
         }
 
+
+
+
+
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
@@ -134,6 +138,10 @@ public class MainAllActivity extends AppCompatActivity {
             return rootView;
         }
     }
+
+
+
+
 
     /**
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
