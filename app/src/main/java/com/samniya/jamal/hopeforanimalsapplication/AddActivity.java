@@ -179,12 +179,13 @@ public class AddActivity extends AppCompatActivity implements AdapterView.OnItem
                     //get user email to set is as the owner of this task
 
                     FirebaseAuth auth = FirebaseAuth.getInstance();
-                    myAnimal.setOwner(auth.getCurrentUser().getUid());
+//                    myAnimal.setOwner(auth.getCurrentUser().getUid());
+                    DatabaseReference reference=FirebaseDatabase.getInstance().getReference();
 
-                    String key = databaseReference1.child("MyAnimal").push().getKey();
+                    String key = reference.child("MyAnimal").push().getKey();
                     myAnimal.setKey(key);
 
-                    databaseReference1.child("MyAnimal").child(key).setValue(myAnimal).addOnCompleteListener(new OnCompleteListener<Void>() {
+                   reference.child("MyAnimal").child(key).setValue(myAnimal).addOnCompleteListener(new OnCompleteListener<Void>() {
 
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {

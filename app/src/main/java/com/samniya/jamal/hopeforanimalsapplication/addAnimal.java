@@ -94,9 +94,6 @@ public class addAnimal extends showAllTasksActivity {
 
 
 
-                {
-
-                }
 
 
                 @Override
