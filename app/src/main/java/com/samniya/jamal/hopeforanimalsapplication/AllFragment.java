@@ -11,6 +11,12 @@ import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+
+import static com.samniya.jamal.hopeforanimalsapplication.MyAnimalAdapter.*;
 
 
 /**
@@ -89,6 +95,7 @@ public class AllFragment extends Fragment  {
         return view;
     }
 
+
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
@@ -130,4 +137,21 @@ public class AllFragment extends Fragment  {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+    public void onDataChange(DataSnapshot dataSnapshot) {
+        MyAnimalAdapter.clear();
+        for (DataSnapshot d:dataSnapshot.getChildren())
+        {
+            MyAnimal b=d.getValue(MyAnimal.class);
+            MyAnimalAdapter.add(b);
+        }
+        MyAnimalAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onCancelled(DatabaseError databaseError) {
+        Toast.makeText("onCancelled", AllFragment.this, Toast.LENGTH_SHORT).show();
+
+    }
+});
+
 }
