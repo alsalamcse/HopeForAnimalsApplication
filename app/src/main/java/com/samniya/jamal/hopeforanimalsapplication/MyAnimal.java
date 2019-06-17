@@ -5,7 +5,7 @@ public class MyAnimal {
     public String name;
     public String kind;
     public String age;
-    public String Price;
+    public String price;
     public String color;
     private String owner;
 
@@ -35,11 +35,11 @@ public class MyAnimal {
     }
 
     public String getPrice() {
-        return Price;
+        return price;
     }
 
     public void setPrice(String price) {
-        Price = price;
+        this.price = price;
     }
 
     public String getColor() {
@@ -70,7 +70,7 @@ public class MyAnimal {
                 "name='" + name + '\'' +
                 ", kind='" + kind + '\'' +
                 ", age='" + age + '\'' +
-                ", Price='" + Price + '\'' +
+                ", Price='" + price + '\'' +
                 ", color='" + color + '\'' +
                 ", owner='" + owner + '\'' +
                 '}';

@@ -69,10 +69,6 @@ public class AllFragment extends Fragment  {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
-
-
-
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -137,21 +133,22 @@ public class AllFragment extends Fragment  {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
     public void onDataChange(DataSnapshot dataSnapshot) {
-        MyAnimalAdapter.clear();
+        myAnimalAdapter.clear();
         for (DataSnapshot d:dataSnapshot.getChildren())
         {
             MyAnimal b=d.getValue(MyAnimal.class);
-            MyAnimalAdapter.add(b);
+            myAnimalAdapter.add(b);
         }
-        MyAnimalAdapter.notifyDataSetChanged();
+        myAnimalAdapter.notifyDataSetChanged();
     }
 
-    @Override
+
     public void onCancelled(DatabaseError databaseError) {
-        Toast.makeText("onCancelled", AllFragment.this, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "onCancelled", Toast.LENGTH_SHORT).show();
 
     }
-});
+};
 
-}
+

@@ -41,7 +41,7 @@ public class MainAllActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_all);
-        FloatingActionButton search = (FloatingActionButton) findViewById(R.id.searchId);
+        FloatingActionButton search = (FloatingActionButton) findViewById(R.id.searchBtn);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         // Create the adapter that will return a fragment for each of the three
@@ -57,7 +57,7 @@ public class MainAllActivity extends AppCompatActivity {
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.add1);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

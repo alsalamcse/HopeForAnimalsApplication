@@ -34,6 +34,7 @@ public class AddActivity extends AppCompatActivity implements AdapterView.OnItem
     private String[] InfoList;
     public static final int SPECIAL_NUMBER = 1;
     private DatabaseReference databaseReference1;
+//    , AnimalInfo;
  ;
 
     ImageButton selectPhoto1;
@@ -47,7 +48,7 @@ public class AddActivity extends AppCompatActivity implements AdapterView.OnItem
         etPrice1 =  findViewById(R.id.etPrice);////////////
          etColor1 =  findViewById(R.id.etColor);/////////
         imageView1=findViewById(R.id.imageView11);
-
+//        AnimalInfo=FirebaseDatabase.getInstance().getReference();
         databaseReference1= FirebaseDatabase.getInstance().getReference().child("Animal");
          add = (Button)  findViewById(R.id.btnAdd);
         AgeSpinner1 = (Spinner) findViewById(R.id.spinnerAge1);////////////
@@ -96,13 +97,12 @@ public class AddActivity extends AppCompatActivity implements AdapterView.OnItem
             @Override
             public void onClick(View v) {
                 dataHandler();
-                DatabaseReference AnimalInfo = databaseReference1.child(etName1.getText().toString());
-                AnimalInfo.child(KindSpinner1.getSelectedItem().toString());
-                AnimalInfo.child(AgeSpinner1.getSelectedItem().toString());
-                AnimalInfo.child(etColor1.getText().toString());
-                AnimalInfo.child(etPrice1.getText().toString());
-                Intent intent1 = new Intent(getApplicationContext(), MainAllActivity.class);
-                startActivity(intent1);
+//               databaseReference1.child(etName1.getText().toString());
+//                databaseReference1.child(KindSpinner1.getSelectedItem().toString());
+//                databaseReference1.child(AgeSpinner1.getSelectedItem().toString());
+//                databaseReference1.child(etColor1.getText().toString());
+//                databaseReference1.child(etPrice1.getText().toString());
+
             }
 
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -168,12 +168,13 @@ public class AddActivity extends AppCompatActivity implements AdapterView.OnItem
 
 
                 if (isOk) {
-                    final MyAnimal myAnimal = new MyAnimal();
-                    myAnimal.getAge();
-                    myAnimal.getColor();
-                    myAnimal.getKind();
-                    myAnimal.getPrice();
-                    myAnimal.getName();
+                     MyAnimal myAnimal = new MyAnimal();
+                    myAnimal.setName(name);
+                    myAnimal.setAge(age);
+                    myAnimal.setColor(color);
+                    myAnimal.setKind(kind);
+                    myAnimal.setPrice(price);
+
 
 
                     //get user email to set is as the owner of this task
@@ -186,14 +187,13 @@ public class AddActivity extends AppCompatActivity implements AdapterView.OnItem
                     myAnimal.setKey(key);
 
                    reference.child("MyAnimal").child(key).setValue(myAnimal).addOnCompleteListener(new OnCompleteListener<Void>() {
-
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
 
                                 Toast.makeText(AddActivity.this, "Add Successful", Toast.LENGTH_SHORT).show();
 
-                                Intent i = new Intent(getBaseContext(), AllFragment.class);
+                                Intent i = new Intent(getBaseContext(), MainAllActivity.class);
 
                                 startActivity(i);
 

@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "28644702598-5762n18e3d6ji4vknasukds1dv81il7d.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.samniya.jamal.hopeforanimalsapplication",
+            "certificate_hash": "905600aa45827a3ea4f60a53a8e7459030b5b400"
+          }
+        },
+        {
           "client_id": "28644702598-3438r33d8fu1hfn9v2itemih4tpt74rf.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
@@ -33,20 +41,13 @@
         }
       ],
       "services": {
-        "analytics_service": {
-          "status": 1
-        },
         "appinvite_service": {
-          "status": 2,
           "other_platform_oauth_client": [
             {
               "client_id": "28644702598-bcahnonjf9ljn2c73cqruqmf3sfi9bds.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
-        },
-        "ads_service": {
-          "status": 2
         }
       }
     }
