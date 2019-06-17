@@ -13,8 +13,12 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import static com.samniya.jamal.hopeforanimalsapplication.MyAnimalAdapter.*;
 
@@ -40,7 +44,7 @@ public class AllFragment extends Fragment  {
     MyAnimalAdapter myAnimalAdapter;
 
 
-    private OnFragmentInteractionListener mListener;
+    private MyFragment.OnFragmentInteractionListener mListener;
 
 
     public AllFragment() {
@@ -102,8 +106,8 @@ public class AllFragment extends Fragment  {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
+        if (context instanceof MyFragment.OnFragmentInteractionListener) {
+            mListener = (MyFragment.OnFragmentInteractionListener) context;
         } else {
 //            throw new RuntimeException(context.toString()
 //                    + " must implement OnFragmentInteractionListener");
@@ -128,11 +132,15 @@ public class AllFragment extends Fragment  {
      * See the Android Training lesson <a href=
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
+     *
      */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
-    }
+    private void getAllAnimals(){
+        DatabaseReference reference=FirebaseDatabase.getInstance().getReference();
+        FirebaseAuth auth=FirebaseAuth.getInstance();
+        reference.child("MyEvents").child(auth.getUid()).orderByChild("eventTime").addValueEventListener(new ValueEventListener() {
+
+
+
 
     public void onDataChange(DataSnapshot dataSnapshot) {
         myAnimalAdapter.clear();
@@ -149,6 +157,12 @@ public class AllFragment extends Fragment  {
         Toast.makeText(getContext(), "onCancelled", Toast.LENGTH_SHORT).show();
 
     }
-};
+});
+    }
+    public interface OnFragmentInteractionListener {
+        // TODO: Update argument type and name
+        void onFragmentInteraction(Uri uri);
+    }
+}
 
 
