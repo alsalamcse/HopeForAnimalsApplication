@@ -133,7 +133,7 @@ public class AddActivity extends AppCompatActivity implements AdapterView.OnItem
                 String color = etColor1.getText().toString();
                 String price = etPrice1.getText().toString();
                 int finalPrice = Integer.parseInt(price);
-                String Kind = KindSpinner1.getSelectedItem().toString();
+                String kind = KindSpinner1.getSelectedItem().toString();
                 String age = AgeSpinner1.getSelectedItem().toString();
 
 
