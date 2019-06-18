@@ -90,10 +90,13 @@ public class AllFragment extends Fragment  {
         View view= inflater.inflate(R.layout.fragment_all, container, false);
 
         listView=(ListView)view. findViewById(R.id.listView);
+
         ArrayAdapter<String>myAnimalAdapter=new ArrayAdapter<>(getContext(),R.layout.animal_item);
-        AllFragment.setAdapter(myAnimalAdapter);
+      //  AllFragment.setAdapter(myAnimalAdapter);
+        listView.setAdapter(myAnimalAdapter);
         return view;
     }
+
 
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -134,35 +137,60 @@ public class AllFragment extends Fragment  {
      * >Communicating with Other Fragments</a> for more information.
      *
      */
-    private void getAllAnimals(){
-        DatabaseReference reference=FirebaseDatabase.getInstance().getReference();
-        FirebaseAuth auth=FirebaseAuth.getInstance();
-        reference.child("MyEvents").child(auth.getUid()).orderByChild("eventTime").addValueEventListener(new ValueEventListener() {
-
-
-
-
-    public void onDataChange(DataSnapshot dataSnapshot) {
-        myAnimalAdapter.clear();
-        for (DataSnapshot d:dataSnapshot.getChildren())
-        {
-            MyAnimal b=d.getValue(MyAnimal.class);
-            myAnimalAdapter.add(b);
-        }
-        myAnimalAdapter.notifyDataSetChanged();
-    }
-
-
-    public void onCancelled(DatabaseError databaseError) {
-        Toast.makeText(getContext(), "onCancelled", Toast.LENGTH_SHORT).show();
-
-    }
-});
-    }
+//    private final void getAllAnimals(){
+//        DatabaseReference reference=FirebaseDatabase.getInstance().getReference();
+//        FirebaseAuth auth=FirebaseAuth.getInstance();
+//        reference.child("MyAnimals").child(auth.getUid()).orderByChild("newAnimal").addValueEventListener(new ValueEventListener() {
+//
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                myAnimalAdapter.clear();
+//                for (DataSnapshot d:dataSnapshot.getChildren())
+//                {
+//                    MyAnimal b=d.getValue(MyAnimal.class);
+//                    myAnimalAdapter.add(b);
+//                }
+//                myAnimalAdapter.notifyDataSetChanged();
+//            }
+//            public void onCancelled(DatabaseError databaseError) {
+//                Toast.makeText(getContext(), "onCancelled", Toast.LENGTH_SHORT).show();
+//
+//            }
+//        });
+//    }
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
-}
+
+
+    private void getAllAnimals() {
+        DatabaseReference reference=FirebaseDatabase.getInstance().getReference();
+        FirebaseAuth auth=FirebaseAuth.getInstance();
+        reference.child("MyAnimals").child(auth.getUid()).orderByChild("newAnimal").addValueEventListener(new ValueEventListener() {
+
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                myAnimalAdapter.clear();
+                for (DataSnapshot d:dataSnapshot.getChildren())
+                {
+                    MyAnimal b=d.getValue(MyAnimal.class);
+                    myAnimalAdapter.add(b);
+                }
+                myAnimalAdapter.notifyDataSetChanged();
+            }
+            public void onCancelled(DatabaseError databaseError) {
+                Toast.makeText(getContext(), "onCancelled", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+    }
+    }
+
+
+
+
+
+
+
+
 
 
